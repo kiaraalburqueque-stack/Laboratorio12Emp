@@ -15,12 +15,29 @@ const RATINGS = [
   { value: '18', label: '18 · mayores de 18' },
 ]
 
+// Shows the API message for one field, linked to its input with aria-describedby.
+function FieldError({ name, errors }) {
+  if (!errors[name]) return null
+  return (
+    <p id={`${name}-error`} className="movie-form__field-error">
+      {errors[name].join(' ')}
+    </p>
+  )
+}
+
+// Props that mark an input as invalid when the API rejected it.
+function invalidProps(name, errors) {
+  return errors[name] ? { 'aria-invalid': true, 'aria-describedby': `${name}-error` } : {}
+}
+
 // Form to add a movie. Every input is controlled by the `form` state; on submit
 // it POSTs the body to the API and, when it works, goes back to the list.
 function MovieFormPage() {
   const [form, setForm] = useState(EMPTY_FORM)
   const [submitting, setSubmitting] = useState(false)
   const [error, setError] = useState(null)
+  // Messages the API returns for each field, e.g. { title: ['Este campo no puede estar en blanco.'] }
+  const [fieldErrors, setFieldErrors] = useState({})
   const navigate = useNavigate()
   const notify = useNotify()
 
@@ -28,12 +45,15 @@ function MovieFormPage() {
   function handleChange(event) {
     const { name, value } = event.target
     setForm((current) => ({ ...current, [name]: value }))
+    // Once the person edits a field, its old error message no longer applies.
+    setFieldErrors((current) => ({ ...current, [name]: undefined }))
   }
 
   async function handleSubmit(event) {
     event.preventDefault() // the browser must not send the form and reload the page
     setSubmitting(true)
     setError(null)
+    setFieldErrors({})
     try {
       // The score is optional: when it is empty it is not sent and the API uses its default (0).
       const { score, ...rest } = form
@@ -42,7 +62,13 @@ function MovieFormPage() {
       notify(`«${created.title}» se agregó a la cartelera`, { type: 'success' })
       navigate('/peliculas')
     } catch (err) {
-      setError(describeApiError(err))
+      if (err.response?.status === 400 && typeof err.response.data === 'object') {
+        // Validation error: Django REST Framework answers with one list of messages per field.
+        setFieldErrors(err.response.data)
+        setError('Revisa los campos marcados: la API no aceptó los datos.')
+      } else {
+        setError(describeApiError(err))
+      }
     } finally {
       setSubmitting(false)
     }
@@ -63,38 +89,44 @@ function MovieFormPage() {
 
         <div className="movie-form__field movie-form__field--wide">
           <label htmlFor="title">Título</label>
-          <input id="title" name="title" type="text" value={form.title} onChange={handleChange} />
+          <input id="title" name="title" type="text" value={form.title} onChange={handleChange} {...invalidProps('title', fieldErrors)} />
+          <FieldError name="title" errors={fieldErrors} />
         </div>
 
         <div className="movie-form__field">
           <label htmlFor="genre">Género</label>
-          <input id="genre" name="genre" type="text" value={form.genre} onChange={handleChange} />
+          <input id="genre" name="genre" type="text" value={form.genre} onChange={handleChange} {...invalidProps('genre', fieldErrors)} />
+          <FieldError name="genre" errors={fieldErrors} />
         </div>
 
         <div className="movie-form__field">
           <label htmlFor="duration">Duración (min)</label>
-          <input id="duration" name="duration" type="number" inputMode="numeric" value={form.duration} onChange={handleChange} />
+          <input id="duration" name="duration" type="number" inputMode="numeric" value={form.duration} onChange={handleChange} {...invalidProps('duration', fieldErrors)} />
+          <FieldError name="duration" errors={fieldErrors} />
         </div>
 
         <div className="movie-form__field">
           <label htmlFor="rating">Clasificación</label>
-          <select id="rating" name="rating" value={form.rating} onChange={handleChange}>
+          <select id="rating" name="rating" value={form.rating} onChange={handleChange} {...invalidProps('rating', fieldErrors)}>
             {RATINGS.map((rating) => (
               <option key={rating.value} value={rating.value}>
                 {rating.label}
               </option>
             ))}
           </select>
+          <FieldError name="rating" errors={fieldErrors} />
         </div>
 
         <div className="movie-form__field">
           <label htmlFor="score">Valoración (0 a 10)</label>
-          <input id="score" name="score" type="number" step="0.1" value={form.score} onChange={handleChange} />
+          <input id="score" name="score" type="number" step="0.1" value={form.score} onChange={handleChange} {...invalidProps('score', fieldErrors)} />
+          <FieldError name="score" errors={fieldErrors} />
         </div>
 
         <div className="movie-form__field movie-form__field--wide">
           <label htmlFor="synopsis">Sinopsis</label>
-          <textarea id="synopsis" name="synopsis" rows={3} value={form.synopsis} onChange={handleChange} />
+          <textarea id="synopsis" name="synopsis" rows={3} value={form.synopsis} onChange={handleChange} {...invalidProps('synopsis', fieldErrors)} />
+          <FieldError name="synopsis" errors={fieldErrors} />
         </div>
 
         <div className="movie-form__actions movie-form__field--wide">

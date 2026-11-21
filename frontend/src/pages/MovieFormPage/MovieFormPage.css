@@ -46,3 +46,13 @@
     grid-template-columns: 1fr;
   }
 }
+
+.movie-form__field-error {
+  margin-top: var(--space-1);
+  font-size: var(--font-size-sm);
+  color: var(--color-danger);
+}
+
+.movie-form [aria-invalid='true'] {
+  border-color: var(--color-danger);
+}
