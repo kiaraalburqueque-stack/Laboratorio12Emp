@@ -1,0 +1,106 @@
+[
+  {
+    "model": "movies.movie",
+    "pk": 1,
+    "fields": {
+      "title": "Órbita Final",
+      "genre": "Ciencia ficción",
+      "duration": 128,
+      "rating": "PG-13",
+      "score": "8.7",
+      "synopsis": "Una tripulación varada en la estación espacial debe decidir quién regresa a la Tierra.",
+      "created_at": "2026-11-20T12:00:00Z"
+    }
+  },
+  {
+    "model": "movies.movie",
+    "pk": 2,
+    "fields": {
+      "title": "La Casa del Puerto",
+      "genre": "Terror",
+      "duration": 102,
+      "rating": "14",
+      "score": "7.4",
+      "synopsis": "Una familia hereda una casona en el Callao y descubre que sus antiguos dueños nunca se fueron.",
+      "created_at": "2026-11-20T12:00:00Z"
+    }
+  },
+  {
+    "model": "movies.movie",
+    "pk": 3,
+    "fields": {
+      "title": "Corazón de Barro",
+      "genre": "Romance",
+      "duration": 110,
+      "rating": "APT",
+      "score": "7.9",
+      "synopsis": "Un alfarero de Chulucanas intenta salvar el taller de su abuelo.",
+      "created_at": "2026-11-20T12:00:00Z"
+    }
+  },
+  {
+    "model": "movies.movie",
+    "pk": 4,
+    "fields": {
+      "title": "Código Rojo",
+      "genre": "Acción",
+      "duration": 118,
+      "rating": "14",
+      "score": "8.1",
+      "synopsis": "Una analista de ciberseguridad tiene doce horas para detener un ataque.",
+      "created_at": "2026-11-20T12:00:00Z"
+    }
+  },
+  {
+    "model": "movies.movie",
+    "pk": 5,
+    "fields": {
+      "title": "El Gran Viaje de Pipo",
+      "genre": "Animación",
+      "duration": 95,
+      "rating": "APT",
+      "score": "8.4",
+      "synopsis": "Un colibrí que no sabe volar recorre los Andes para reencontrarse con su bandada.",
+      "created_at": "2026-11-20T12:00:00Z"
+    }
+  },
+  {
+    "model": "movies.movie",
+    "pk": 6,
+    "fields": {
+      "title": "Última Ronda",
+      "genre": "Drama",
+      "duration": 124,
+      "rating": "PG-13",
+      "score": "7.6",
+      "synopsis": "Un boxeador retirado entrena a la hija de su antiguo rival.",
+      "created_at": "2026-11-20T12:00:00Z"
+    }
+  },
+  {
+    "model": "movies.movie",
+    "pk": 7,
+    "fields": {
+      "title": "Risas en Cuarentena",
+      "genre": "Comedia",
+      "duration": 98,
+      "rating": "APT",
+      "score": "6.9",
+      "synopsis": "Cinco compañeros de departamento quedan encerrados una semana.",
+      "created_at": "2026-11-20T12:00:00Z"
+    }
+  },
+  {
+    "model": "movies.movie",
+    "pk": 8,
+    "fields": {
+      "title": "Sombras de Lima",
+      "genre": "Suspenso",
+      "duration": 131,
+      "rating": "18",
+      "score": "8.3",
+      "synopsis": "Un detective veterano y una periodista novata siguen a un asesino en el Centro Histórico.",
+      "created_at": "2026-11-20T12:00:00Z"
+    }
+  }
+]
