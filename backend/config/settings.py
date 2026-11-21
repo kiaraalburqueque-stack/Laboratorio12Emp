@@ -34,11 +34,14 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
+    "corsheaders",
     "movies",
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    # Right after SecurityMiddleware, before any middleware that can answer (CommonMiddleware).
+    "corsheaders.middleware.CorsMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -88,6 +91,11 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# CORS: only the origin of the React dev server may call the API from a browser.
+# Exact origins, never the wildcard (CORS_ALLOW_ALL_ORIGINS stays False).
+# In another environment, set CORS_ALLOWED_ORIGINS="https://my-front.example" (comma separated).
+CORS_ALLOWED_ORIGINS = env_list("CORS_ALLOWED_ORIGINS", "http://localhost:5173,http://127.0.0.1:5173")
 
 REST_FRAMEWORK = {
     # The lab API is public on purpose; authentication arrives in a later week.
