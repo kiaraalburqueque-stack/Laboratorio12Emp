@@ -2,7 +2,8 @@ import { useCallback, useEffect, useState } from 'react'
 import Button from '../../components/Button/Button'
 import Skeleton from '../../components/Skeleton/Skeleton'
 import { describeApiError } from '../../api/client'
-import { listMovies } from '../../api/movies'
+import { deleteMovie, listMovies } from '../../api/movies'
+import { useNotify } from '../../notifications/useNotify'
 import './MoviesPage.css'
 
 const SKELETON_ROWS = 5
@@ -40,6 +41,23 @@ function MoviesPage() {
 
   const reload = useCallback(() => setAttempt((n) => n + 1), [])
 
+  const notify = useNotify()
+  // Id of the movie being deleted, to disable its button while the request runs.
+  const [deletingId, setDeletingId] = useState(null)
+
+  async function handleDelete(movie) {
+    setDeletingId(movie.id)
+    try {
+      await deleteMovie(movie.id)
+      notify(`Se eliminó «${movie.title}»`, { type: 'success' })
+      reload() // ask the API again: the table shows what the server really has
+    } catch (err) {
+      notify(describeApiError(err), { type: 'error' })
+    } finally {
+      setDeletingId(null)
+    }
+  }
+
   return (
     <section className="movies-page container section" aria-labelledby="movies-title" aria-busy={loading}>
       <div className="cluster mb-4">
@@ -61,6 +79,7 @@ function MoviesPage() {
                   <td><Skeleton variant="text" width="40%" /></td>
                   <td><Skeleton variant="text" width="40%" /></td>
                   <td><Skeleton variant="text" width="30%" /></td>
+                  <td><Skeleton variant="text" width="60%" /></td>
                 </tr>
               ))}
             </tbody>
@@ -93,6 +112,7 @@ function MoviesPage() {
                 <th scope="col">Duración</th>
                 <th scope="col">Clasificación</th>
                 <th scope="col">Valoración</th>
+                <th scope="col"><span className="visually-hidden">Acciones</span></th>
               </tr>
             </thead>
             <tbody>
@@ -103,6 +123,17 @@ function MoviesPage() {
                   <td>{movie.duration} min</td>
                   <td>{movie.rating}</td>
                   <td>⭐ {movie.score}</td>
+                  <td className="movies-table__actions">
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      aria-label={`Eliminar ${movie.title}`}
+                      disabled={deletingId === movie.id}
+                      onClick={() => handleDelete(movie)}
+                    >
+                      {deletingId === movie.id ? 'Eliminando…' : '🗑 Eliminar'}
+                    </Button>
+                  </td>
                 </tr>
               ))}
             </tbody>
