@@ -1,8 +1,10 @@
+import { Link, NavLink } from 'react-router-dom'
 import './Header.css'
 
+// Sections of the home page (plain anchors) and the API management page (a route).
 const NAV_LINKS = [
-  { label: 'Cartelera', href: '#billboard' },
-  { label: 'Estrenos', href: '#premieres' },
+  { label: 'Cartelera', href: '/#billboard' },
+  { label: 'Estrenos', href: '/#premieres' },
   { label: 'Contacto', href: '#contact' },
 ]
 
@@ -11,10 +13,10 @@ function Header({ cinemaName, favoritesCount }) {
   return (
     <header className="header">
       <div className="header__inner container">
-        <a href="#" className="header__brand">
+        <Link to="/" className="header__brand">
           <span className="header__logo" aria-hidden="true">🎬</span>
           {cinemaName}
-        </a>
+        </Link>
         <nav aria-label="Navegación principal">
           <ul className="header__nav">
             {NAV_LINKS.map((link) => (
@@ -24,6 +26,11 @@ function Header({ cinemaName, favoritesCount }) {
                 </a>
               </li>
             ))}
+            <li>
+              <NavLink to="/peliculas" className="header__link header__link--admin">
+                Gestión
+              </NavLink>
+            </li>
           </ul>
         </nav>
         <span className="header__favorites" aria-live="polite">
