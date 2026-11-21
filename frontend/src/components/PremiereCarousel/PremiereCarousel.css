@@ -1,0 +1,44 @@
+.carousel {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.carousel__track {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: calc((100% - (var(--visible) - 1) * var(--space-4)) / var(--visible));
+  gap: var(--space-4);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.carousel__track::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel__item {
+  scroll-snap-align: start;
+}
+
+.carousel__arrow {
+  font-size: 1.5rem;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+}
+
+.premiere__poster {
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.premiere__title {
+  margin-top: var(--space-2);
+  font-size: var(--font-size-md);
+}

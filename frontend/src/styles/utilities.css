@@ -1,0 +1,55 @@
+/* Small single-purpose helpers. */
+
+/* Hides an element visually but keeps it for screen readers. */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.mt-4 {
+  margin-top: var(--space-4);
+}
+
+/* Lab 11 utilities. */
+.section {
+  padding-top: var(--space-7);
+}
+
+.cluster {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.surface {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
+.mt-2 {
+  margin-top: var(--space-2);
+}
+
+.mb-4 {
+  margin-bottom: var(--space-4);
+}

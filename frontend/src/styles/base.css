@@ -1,0 +1,17 @@
+/* Global element styles and layout helpers. */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--header-height);
+}
+
+body {
+  font-family: var(--font-family);
+  background: var(--color-bg);
+  color: var(--color-text);
+  -webkit-font-smoothing: antialiased;
+}
+
+.container {
+  width: min(100% - 2 * var(--space-5), var(--container-width));
+  margin-inline: auto;
+}

@@ -1,0 +1,8 @@
+/* Entry point of the CSS architecture: tokens -> reset -> base -> typography
+   -> forms -> utilities. Each component imports its own stylesheet. */
+@import './variables.css';
+@import './reset.css';
+@import './base.css';
+@import './typography.css';
+@import './forms.css';
+@import './utilities.css';

@@ -1,0 +1,69 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+  transition: transform var(--transition-fast), background var(--transition-fast),
+    color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.button:hover {
+  transform: translateY(-2px);
+}
+
+.button:active {
+  transform: translateY(0);
+}
+
+/* Sizes */
+.button--md {
+  padding: var(--space-3) var(--space-5);
+}
+
+.button--sm {
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--font-size-sm);
+}
+
+/* Variants */
+.button--primary {
+  background: var(--color-primary);
+  color: #111;
+}
+
+.button--secondary {
+  background: transparent;
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.button--secondary:hover {
+  background: rgba(251, 191, 36, 0.12);
+}
+
+.button--ghost {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: var(--color-border);
+  color: var(--color-text);
+}
+
+.button--ghost:hover {
+  border-color: var(--color-text-muted);
+}
+
+/* Pressed state, used by toggle buttons such as "favorite". */
+.button[aria-pressed='true'] {
+  border-color: var(--color-danger);
+  color: var(--color-danger);
+}
+
+.button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+}

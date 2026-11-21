@@ -1,0 +1,44 @@
+/* Text styles shared by every component. */
+body {
+  line-height: var(--line-height-body);
+}
+
+h1,
+h2,
+h3 {
+  line-height: var(--line-height-tight);
+  font-weight: 800;
+}
+
+.measure {
+  max-width: 70ch;
+}
+
+.text-muted {
+  color: var(--color-text-muted);
+}
+
+.text-small {
+  font-size: var(--font-size-sm);
+}
+
+/* Section headings with a small label on top ("eyebrow"). */
+.eyebrow {
+  display: block;
+  margin-bottom: var(--space-1);
+  font-size: var(--font-size-xs-caps);
+  font-weight: 700;
+  letter-spacing: var(--letter-spacing-caps);
+  text-transform: uppercase;
+  color: var(--color-primary);
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: var(--font-size-xl);
+  letter-spacing: -0.01em;
+}
+
+.text-center {
+  text-align: center;
+}

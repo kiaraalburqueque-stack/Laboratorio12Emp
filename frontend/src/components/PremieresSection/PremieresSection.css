@@ -1,0 +1,26 @@
+.premieres__toggle {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin: 0;
+  cursor: pointer;
+}
+
+.premieres__skeletons {
+  display: grid;
+  grid-template-columns: repeat(var(--visible), minmax(0, 1fr));
+  gap: var(--space-4);
+  /* Same side space as the carousel arrows, so nothing jumps when data arrives. */
+  padding-inline: calc(40px + var(--space-3));
+}
+
+.premieres__error {
+  padding: var(--space-5);
+  border-color: var(--color-danger);
+}
+
+.premieres__error-title {
+  margin-bottom: var(--space-1);
+  font-weight: 700;
+  color: var(--color-danger);
+}
