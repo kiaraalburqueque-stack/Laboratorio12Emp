@@ -10,6 +10,7 @@ import Button from './components/Button/Button'
 import MovieSearch from './components/MovieSearch/MovieSearch'
 import PremieresSection from './components/PremieresSection/PremieresSection'
 import MoviesPage from './pages/MoviesPage/MoviesPage'
+import MovieFormPage from './pages/MovieFormPage/MovieFormPage'
 import { movies, featuredMovie } from './data/movies'
 import { cinema } from './data/cinema'
 
@@ -76,6 +77,7 @@ function App() {
           />
           {/* Pages that talk to the Django API (week 12). */}
           <Route path="/peliculas" element={<MoviesPage />} />
+          <Route path="/peliculas/nueva" element={<MovieFormPage />} />
         </Routes>
       </main>
       <Footer cinemaName={cinema.name} contact={cinema.contact} />

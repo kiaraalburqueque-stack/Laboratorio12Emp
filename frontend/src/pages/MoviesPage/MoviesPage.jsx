@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import Button from '../../components/Button/Button'
 import Skeleton from '../../components/Skeleton/Skeleton'
 import { describeApiError } from '../../api/client'
@@ -65,6 +66,9 @@ function MoviesPage() {
           <span className="eyebrow">API de Django · /api/movies/</span>
           <h1 id="movies-title" className="section-title">Gestión de películas</h1>
         </div>
+        <Link to="/peliculas/nueva" className="button button--primary button--md">
+          + Nueva película
+        </Link>
       </div>
 
       {loading && (
